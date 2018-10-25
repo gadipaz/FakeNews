@@ -1,8 +1,6 @@
-package gadi.fake.news.models;
+package gadi.fake.news.model;
 
 import com.google.gson.annotations.SerializedName;
-
-import java.util.List;
 
 public class Article {
     @SerializedName("author")

@@ -1,0 +1,72 @@
+package gadi.fake.news.view.ui;
+
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
+import android.databinding.DataBindingUtil;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import java.util.List;
+
+import gadi.fake.news.R;
+import gadi.fake.news.databinding.FragmentArticleListBinding;
+import gadi.fake.news.model.Article;
+import gadi.fake.news.view.adapter.NewsAdapter;
+import gadi.fake.news.view.callback.ArticleClickCallback;
+import gadi.fake.news.viewmodel.ArticlesListViewModel;
+
+public class ArticlesListFragment extends Fragment {
+
+    public static final String TAG = "ProjectListFragment";
+    private NewsAdapter newsAdapter;
+    private FragmentArticleListBinding binding;
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_article_list, container, false);
+
+        newsAdapter = new NewsAdapter(articleClickCallback);
+        binding.projectList.setAdapter(newsAdapter);
+        binding.setIsLoading(true);
+
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        final ArticlesListViewModel viewModel = ViewModelProviders.of(this).get(ArticlesListViewModel.class);
+
+        observeViewModel(viewModel);
+    }
+
+    private void observeViewModel(ArticlesListViewModel viewModel) {
+        // Update the list when the data changes
+        viewModel.getProjectListObservable().observe(this, new Observer<List<Article>>() {
+            @Override
+            public void onChanged(@Nullable List<Article> articles) {
+                if (articles != null) {
+                    binding.setIsLoading(false);
+                    newsAdapter.setArticleList(articles);
+                }
+            }
+        });
+    }
+
+    private final ArticleClickCallback articleClickCallback = new ArticleClickCallback() {
+        @Override
+        public void onClick(Article project) {
+//            if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
+//                ((MainActivity) getActivity()).show(project);
+//            }
+        }
+    };
+
+}
