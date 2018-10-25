@@ -36,65 +36,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-//    /** Shows the project detail fragment */
-//    public void show(Article project) {
-//        ProjectFragment projectFragment = ProjectFragment.forProject(project.name);
-//
-//        getSupportFragmentManager()
-//                .beginTransaction()
-//                .addToBackStack("project")
-//                .replace(R.id.fragment_container,
-//                        projectFragment, null).commit();
-//    }
+    /** Shows the project detail fragment */
+    public void show(Article article) {
+        ArticleDetailsFragment articleDetailsFragment = ArticleDetailsFragment.forArticle(article);
 
-
-//    private static final String TAG = MainActivity.class.getSimpleName();
-//    private static Retrofit retrofit = null;
-//    private RecyclerView recyclerView = null;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-//
-//        recyclerView = findViewById(R.id.recycler_view);
-//        recyclerView.setHasFixedSize(true);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//
-//        connectAndGetApiData();
-//    }
-//
-//    public void connectAndGetApiData(){
-//
-//        if (retrofit == null) {
-//            retrofit = new Retrofit.Builder()
-//                    .baseUrl(BASE_URL)
-//                    .addConverterFactory(GsonConverterFactory.create())
-//                    .build();
-//        }
-//
-//        NewsApiService newsApiService = retrofit.create(NewsApiService.class);
-//
-//        Call<NewsApiResponse> call = newsApiService.getTopHeadlines("");
-//        call.enqueue(new Callback<NewsApiResponse>() {
-//            @Override
-//            public void onResponse(Call<NewsApiResponse> call, Response<NewsApiResponse> response) {
-//                List<Article> articles = response.body().getResults();
-//                recyclerView.setAdapter(new NewsAdapter(articles, R.layout.article_list_item, getApplicationContext(),
-//                        new NewsAdapter.OnItemClickListener() {
-//                            @Override
-//                            public void onItemClick(Article item) {
-//                                Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_SHORT).show();
-//                            }
-//                        }));
-//                //Log.d(TAG, "Number of movies received: " + movies.size());
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<NewsApiResponse> call, Throwable throwable) {
-//                Log.e(TAG, throwable.toString());
-//            }
-//        });
-//    }
+        getSupportFragmentManager()
+                .beginTransaction()
+                .addToBackStack("article")
+                .replace(R.id.fragment_container,
+                        articleDetailsFragment, null).commit();
+    }
 }

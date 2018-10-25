@@ -12,8 +12,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.List;
 
 import gadi.fake.news.R;
@@ -90,23 +88,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ArticleViewHol
     public void onBindViewHolder(ArticleViewHolder holder, final int position) {
         holder.binding.setArticle(articles.get(position));
         holder.binding.executePendingBindings();
-
-//        String image_url = articles.get(position).getUrlToImage();
-//        Picasso.with(context)
-//                .load(image_url)
-//                .placeholder(android.R.drawable.sym_def_app_icon)
-//                .error(android.R.drawable.sym_def_app_icon)
-//                .into(holder.movieImage);
-//        holder.movieImage.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                listener.onItemClick(articles.get(position));
-//            }
-//        });
-//        holder.movieTitle.setText(articles.get(position).getTitle());
-//        //holder.data.setText(articles.get(position).getDescription());
-//        holder.movieDescription.setText(articles.get(position).getDescription());
-//        //holder.rating.setText(articles.get(position).getVoteAverage().toString());
     }
 
     @Override

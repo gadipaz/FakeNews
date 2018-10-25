@@ -1,3 +1,7 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="item_horizontal_margin">8dp</dimen>
+    <dimen name="project_header1">25sp</dimen>
+    <dimen name="project_header2">20sp</dimen>
+    <dimen name="project_text">16sp</dimen>
 </resources>

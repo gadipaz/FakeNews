@@ -12,11 +12,15 @@ import gadi.fake.news.service.ArticleRepository;
 
 public class ArticlesListViewModel extends AndroidViewModel {
 
-    private final LiveData<List<Article>> articlesListObservable;
+    private LiveData<List<Article>> articlesListObservable;
 
     public ArticlesListViewModel(@NonNull Application application) {
         super(application);
 
+        refreshNews();
+    }
+
+    public void refreshNews(){
         articlesListObservable = ArticleRepository.getInstance().getArticlesList();
     }
 

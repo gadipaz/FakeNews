@@ -25,6 +25,7 @@ public class ArticlesListFragment extends Fragment {
     public static final String TAG = "ProjectListFragment";
     private NewsAdapter newsAdapter;
     private FragmentArticleListBinding binding;
+    private ArticlesListViewModel viewModel;
 
     @Nullable
     @Override
@@ -42,7 +43,7 @@ public class ArticlesListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        final ArticlesListViewModel viewModel = ViewModelProviders.of(this).get(ArticlesListViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(ArticlesListViewModel.class);
 
         observeViewModel(viewModel);
     }
@@ -62,11 +63,16 @@ public class ArticlesListFragment extends Fragment {
 
     private final ArticleClickCallback articleClickCallback = new ArticleClickCallback() {
         @Override
-        public void onClick(Article project) {
-//            if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
-//                ((MainActivity) getActivity()).show(project);
-//            }
+        public void onClick(Article article) {
+            if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
+                ((MainActivity) getActivity()).show(article);
+            }
         }
     };
 
+    @Override
+    public void onResume() {
+        viewModel.refreshNews();
+        super.onResume();
+    }
 }
