@@ -12,7 +12,7 @@ public interface NewsApiService {
 
     public static final String BASE_URL = "https://newsapi.org/v2/";
 
-    @GET("top-headlines?country=us")
+    @GET("top-headlines?sources=techcrunch")
     Call<NewsApiResponse> getTopHeadlines(@Query("apiKey") String apiKey);
 
 }

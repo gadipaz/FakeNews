@@ -46,7 +46,8 @@ public class ArticleDetailsFragment extends Fragment implements Injectable {
 
         // Inflate this data binding layout
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_article_details, container, false);
-        binding.setIsLoading(true);
+        //TODO: implement ProgressBar
+        //binding.setIsLoading(true);
         // Create and set the adapter for the RecyclerView.
         return binding.getRoot();
     }
@@ -59,6 +60,7 @@ public class ArticleDetailsFragment extends Fragment implements Injectable {
                 .get(ArticleDetailsViewModel.class);
 
         observeViewModel(viewModel);
+        viewModel.setArticle(article);
     }
 
     private void observeViewModel(ArticleDetailsViewModel viewModel) {
@@ -68,8 +70,8 @@ public class ArticleDetailsFragment extends Fragment implements Injectable {
             public void onChanged(@Nullable Article article) {
                 if (article != null) {
                     binding.setArticle(article);
+                    //TODO: implement ProgressBar
                     //binding.setIsLoading(false);
-                    //newsAdapter.setArticleList(articles);
                 }
             }
         });

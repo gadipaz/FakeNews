@@ -3,15 +3,22 @@ package gadi.fake.news.model;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.BindingAdapter;
+import android.support.annotation.NonNull;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.annotations.SerializedName;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import gadi.fake.news.R;
 
@@ -53,7 +60,25 @@ public class Article extends BaseObservable {
         view.loadUrl(url);
     }
 
-    //Didn't succeed to implement the progressbar
+    @BindingAdapter("serverDateToDate")
+    public static void serverDateToDate(@NonNull TextView textView, String date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        Date sourceDate = null;
+        try {
+            sourceDate = dateFormat.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if (sourceDate != null) {
+            SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE");
+            textView.setText(String.format("%s, %s, %s", dayFormat.format(sourceDate),
+                    DateFormat.getDateInstance(DateFormat.MEDIUM).format(sourceDate),
+                    DateFormat.getTimeInstance(DateFormat.SHORT).format(sourceDate)));
+        }
+    }
+
+    //TODO: implement ProgressBar
     /*@BindingAdapter({ "setWebViewClient" })
     public static void setWebViewClient(WebView view, WebViewClient client) {
         view.setWebViewClient(client);

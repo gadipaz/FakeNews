@@ -29,7 +29,9 @@ public class ArticleDetailsViewModel extends AndroidViewModel {
     public ArticleDetailsViewModel(@NonNull ArticleRepository articleRepository, @NonNull Application application) {
         super(application);
         this.articleObservable = new MutableLiveData<>();
-        //articleObservable.setValue(article);
+    }
+    public void setArticle(Article article){
+        articleObservable.setValue(article);
     }
 
     /**

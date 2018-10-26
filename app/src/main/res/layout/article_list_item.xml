@@ -28,7 +28,6 @@
                 android:id="@+id/article_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top"
                 bind:urlToImage="@{article.urlToImage}"
                 />
 
@@ -36,15 +35,23 @@
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack"
                 android:textStyle="bold"
-                android:textSize="@dimen/project_text"
+                android:textSize="@dimen/article_header1"
                 android:text="@{article.title}"/>
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/article_header2"
+                bind:serverDateToDate="@{article.publishedAt}"/>
 
             <TextView
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/project_text"
+                android:textSize="@dimen/article_text"
+                android:paddingTop="10dp"
                 android:text="@{article.description}"/>
 
         </LinearLayout>
