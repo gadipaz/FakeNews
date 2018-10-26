@@ -57,7 +57,7 @@ public class ArticlesListFragment extends Fragment implements Injectable {
 
     private void observeViewModel(ArticlesListViewModel viewModel) {
         // Update the list when the data changes
-        viewModel.getProjectListObservable().observe(this, new Observer<List<Article>>() {
+        viewModel.getArticlesListObservable().observe(this, new Observer<List<Article>>() {
             @Override
             public void onChanged(@Nullable List<Article> articles) {
                 if (articles != null) {
