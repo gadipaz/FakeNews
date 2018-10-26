@@ -16,6 +16,8 @@ import android.webkit.WebViewClient;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import gadi.fake.news.model.Article;
 import gadi.fake.news.service.ArticleRepository;
 
@@ -23,10 +25,11 @@ public class ArticleDetailsViewModel extends AndroidViewModel {
 
     private final MutableLiveData<Article> articleObservable;
 
-    public ArticleDetailsViewModel(@NonNull Application application, Article article) {
+    @Inject
+    public ArticleDetailsViewModel(@NonNull ArticleRepository articleRepository, @NonNull Application application) {
         super(application);
         this.articleObservable = new MutableLiveData<>();
-        articleObservable.setValue(article);
+        //articleObservable.setValue(article);
     }
 
     /**

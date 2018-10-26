@@ -7,21 +7,26 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import gadi.fake.news.model.Article;
 import gadi.fake.news.service.ArticleRepository;
 
 public class ArticlesListViewModel extends AndroidViewModel {
 
     private LiveData<List<Article>> articlesListObservable;
+    private ArticleRepository articleRepository;
 
-    public ArticlesListViewModel(@NonNull Application application) {
+    @Inject
+    public ArticlesListViewModel(@NonNull ArticleRepository articleRepository, @NonNull Application application) {
         super(application);
 
+        this.articleRepository = articleRepository;
         refreshNews();
     }
 
     public void refreshNews(){
-        articlesListObservable = ArticleRepository.getInstance().getArticlesList();
+        articlesListObservable = articleRepository.getArticlesList();
     }
 
     /**

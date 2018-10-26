@@ -2,6 +2,7 @@ package gadi.fake.news.view.ui;
 
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -13,14 +14,20 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import gadi.fake.news.R;
 import gadi.fake.news.databinding.FragmentArticleListBinding;
+import gadi.fake.news.di.Injectable;
 import gadi.fake.news.model.Article;
 import gadi.fake.news.view.adapter.NewsAdapter;
 import gadi.fake.news.view.callback.ArticleClickCallback;
 import gadi.fake.news.viewmodel.ArticlesListViewModel;
 
-public class ArticlesListFragment extends Fragment {
+public class ArticlesListFragment extends Fragment implements Injectable {
+
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
 
     public static final String TAG = "ProjectListFragment";
     private NewsAdapter newsAdapter;
@@ -43,7 +50,7 @@ public class ArticlesListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel = ViewModelProviders.of(this).get(ArticlesListViewModel.class);
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(ArticlesListViewModel.class);
 
         observeViewModel(viewModel);
     }
