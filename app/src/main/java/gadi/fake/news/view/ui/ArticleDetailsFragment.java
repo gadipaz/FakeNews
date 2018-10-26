@@ -1,6 +1,5 @@
 package gadi.fake.news.view.ui;
 
-import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
@@ -11,22 +10,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
 import gadi.fake.news.R;
 import gadi.fake.news.databinding.FragmentArticleDetailsBinding;
-import gadi.fake.news.databinding.FragmentArticleListBinding;
 import gadi.fake.news.di.Injectable;
 import gadi.fake.news.model.Article;
-import gadi.fake.news.view.adapter.NewsAdapter;
-import gadi.fake.news.view.callback.ArticleClickCallback;
 import gadi.fake.news.viewmodel.ArticleDetailsViewModel;
-import gadi.fake.news.viewmodel.ArticleViewModelFactory;
-import gadi.fake.news.viewmodel.ArticlesListViewModel;
 
 public class ArticleDetailsFragment extends Fragment implements Injectable {
 
@@ -48,7 +39,6 @@ public class ArticleDetailsFragment extends Fragment implements Injectable {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_article_details, container, false);
         //TODO: implement ProgressBar
         //binding.setIsLoading(true);
-        // Create and set the adapter for the RecyclerView.
         return binding.getRoot();
     }
 
@@ -60,19 +50,17 @@ public class ArticleDetailsFragment extends Fragment implements Injectable {
                 .get(ArticleDetailsViewModel.class);
 
         observeViewModel(viewModel);
+        //Set the article so the observable will notice the change
         viewModel.setArticle(article);
     }
 
     private void observeViewModel(ArticleDetailsViewModel viewModel) {
-        // Update the list when the data changes
-        viewModel.getArticleObservable().observe(this, new Observer<Article>() {
-            @Override
-            public void onChanged(@Nullable Article article) {
-                if (article != null) {
-                    binding.setArticle(article);
-                    //TODO: implement ProgressBar
-                    //binding.setIsLoading(false);
-                }
+        // Update the view when the data changes
+        viewModel.getArticleObservable().observe(this, article -> {
+            if (article != null) {
+                binding.setArticle(article);
+                //TODO: implement ProgressBar
+                //binding.setIsLoading(false);
             }
         });
     }

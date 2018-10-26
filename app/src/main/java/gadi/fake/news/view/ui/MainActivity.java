@@ -4,12 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.widget.Toast;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -17,13 +11,6 @@ import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 import gadi.fake.news.R;
 import gadi.fake.news.model.Article;
-import gadi.fake.news.model.NewsApiResponse;
-import gadi.fake.news.service.NewsApiService;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity implements HasSupportFragmentInjector {
 
@@ -35,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Add project list fragment if this is first creation
+        // Add articles list fragment if this is first creation
         if (savedInstanceState == null) {
             ArticlesListFragment fragment = new ArticlesListFragment();
 
@@ -48,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
     public void show(Article article) {
         ArticleDetailsFragment articleDetailsFragment = ArticleDetailsFragment.forArticle(article);
 
+        //Show article
         getSupportFragmentManager()
                 .beginTransaction()
                 .addToBackStack("article")

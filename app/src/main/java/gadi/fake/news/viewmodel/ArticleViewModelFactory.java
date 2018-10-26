@@ -1,6 +1,5 @@
 package gadi.fake.news.viewmodel;
 
-import android.app.Application;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.util.ArrayMap;
@@ -12,7 +11,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import gadi.fake.news.di.ViewModelSubComponent;
-import gadi.fake.news.model.Article;
 
 @Singleton
 public class ArticleViewModelFactory implements ViewModelProvider.Factory {

@@ -30,7 +30,7 @@ public class ArticlesListViewModel extends AndroidViewModel {
     }
 
     /**
-     * Expose the LiveData Projects query so the UI can observe it.
+     * Expose the LiveData articles query so the UI can observe it.
      */
     public LiveData<List<Article>> getProjectListObservable() {
         return articlesListObservable;
