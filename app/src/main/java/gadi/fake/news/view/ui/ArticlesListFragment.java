@@ -57,23 +57,17 @@ public class ArticlesListFragment extends Fragment implements Injectable {
 
     private void observeViewModel(ArticlesListViewModel viewModel) {
         // Update the list when the data changes
-        viewModel.getArticlesListObservable().observe(this, new Observer<List<Article>>() {
-            @Override
-            public void onChanged(@Nullable List<Article> articles) {
-                if (articles != null) {
-                    binding.setIsLoading(false);
-                    newsAdapter.setArticleList(articles);
-                }
+        viewModel.getArticlesListObservable().observe(this, articles -> {
+            if (articles != null) {
+                binding.setIsLoading(false);
+                newsAdapter.setArticleList(articles);
             }
         });
     }
 
-    private final ArticleClickCallback articleClickCallback = new ArticleClickCallback() {
-        @Override
-        public void onClick(Article article) {
-            if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
-                ((MainActivity) getActivity()).show(article);
-            }
+    private final ArticleClickCallback articleClickCallback = article -> {
+        if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
+            ((MainActivity) getActivity()).show(article);
         }
     };
 
